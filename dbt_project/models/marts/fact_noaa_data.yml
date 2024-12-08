@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: fact_noaa_data
+    description: "This fact table combines data raw_noaa_data with noaa_stations."
+    columns:
+      - name: date
+        description: ""
+        data_tests:
+          - not_null
+      - name: element
+        description: ""
+        data_tests:
+          - not_null
+      - name: data_value
+        description: ""
+        data_tests:
+          - not_null
+      - name: latitude
+        description: ""
+        data_tests:
+          - not_null
+      - name: longitude
+        description: ""
+        data_tests:
+          - not_null
+      - name: state
+        description: ""
+        data_tests:
+          - not_null

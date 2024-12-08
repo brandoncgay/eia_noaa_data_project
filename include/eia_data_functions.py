@@ -29,6 +29,8 @@ def create_table_in_snowflake(session):
         respondent_name STRING,
         fueltype STRING,
         type_name STRING,
+        timezone STRING,
+        timezone_description STRING,
         value DOUBLE,
         value_units STRING
     )
@@ -39,21 +41,23 @@ def create_table_in_snowflake(session):
 def get_eia_data_from_api(ds):
     load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
     api_key = os.getenv("EIA_API_KEY")
-    url = "https://api.eia.gov/v2/electricity/rto/fuel-type-data/data/"
+    url = "https://api.eia.gov/v2/electricity/rto/daily-fuel-type-data/data/"
     limit = 5000
     offset = 0
     all_data = []
-    start_date = ds
-    end_date = ds_add(ds, 1)
-    print(start_date)
-    print(end_date)
+    start_date = ds_add(ds, -1)
+    end_date = start_date
+    
+    print("start date: " + start_date)
+    print("end date: " + end_date)
 
     while True: 
         params = {
             "api_key": api_key,
-            "frequency": "hourly",
+            "frequency": "daily",
             "start": start_date,
             "end": end_date,
+            "facets[timezone][]": "Pacific",
             "data[]": "value",
             "offset": offset,
             "length": limit
@@ -94,6 +98,8 @@ def merge_data_to_snowflake(data):
         StructField("respondent_name", StringType()),
         StructField("fueltype", StringType()),
         StructField("type_name", StringType()),
+        StructField("timezone", StringType()),
+        StructField("timezone_description", StringType()),
         StructField("value", DoubleType()),
         StructField("value_units", StringType())
     ])
@@ -104,6 +110,8 @@ def merge_data_to_snowflake(data):
             item["respondent-name"], 
             item["fueltype"],
             item["type-name"],
+            item["timezone"],
+            item["timezone-description"],
             item["value"],
             item["value-units"]) for item in data]
     df = session.create_dataframe(rows, schema=schema)
@@ -117,11 +125,13 @@ def merge_data_to_snowflake(data):
         df,
         (target_table["period"] == df["period"]) &
         (target_table["respondent"] == df["respondent"]) &
-        (target_table["fueltype"] == df["fueltype"]),
+        (target_table["fueltype"] == df["fueltype"]) &
+        (target_table["timezone"] == df["timezone"]),
         [when_matched().update(
         {
             "respondent_name": df["respondent_name"],
             "type_name": df["type_name"],
+            "timezone_description": df["timezone_description"],
             "value": df["value"],
             "value_units": df["value_units"]
         }),
@@ -132,6 +142,8 @@ def merge_data_to_snowflake(data):
             "respondent_name": df["respondent_name"],
             "fueltype": df["fueltype"],
             "type_name": df["type_name"],
+            "timezone": df["timezone"],
+            "timezone_description": df["timezone_description"],
             "value": df["value"],
             "value_units": df["value_units"]
         })]

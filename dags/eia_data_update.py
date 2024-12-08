@@ -1,17 +1,17 @@
 from airflow.decorators import dag, task
 from airflow.utils.dates import datetime, timedelta
 
-from include.eia_data_functions import create_snowflake_session, create_table_in_snowflake, get_eia_data_from_api, merge_data_to_snowflake
+from include.eia_data_functions import get_eia_data_from_api, merge_data_to_snowflake
 
 @dag(
-    description="A dag extracts data from eia.gov api and merges it into a snowflake table.",
+    description="A dag that extracts data from eia.gov api and merges it into a snowflake table.",
     default_args={
         "owner": "Brandon Gay",
-        "start_date": datetime(2024, 12, 1),
+        "start_date": datetime(2024, 1, 1),
         "retries": 0,
         "execution_timeout": timedelta(hours=1),
     },
-    start_date=datetime(2024, 12, 1),
+    start_date=datetime(2024, 1, 1),
     max_active_runs=1,
     schedule_interval="@daily",
     catchup=True,

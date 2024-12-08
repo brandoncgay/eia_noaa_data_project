@@ -1,0 +1,73 @@
+version: 2
+
+models:
+  - name: base_bootcamp_eia_fuel_type_data
+    description: "The base_bootcamp_eia_fuel_type_data model is a transformation of the eia_fuel_type_data table, providing a clean and renamed version of the original data from the dataexpert_student.brandoncgay schema."
+    columns:
+      - name: PERIOD
+        description: ""
+        data_tests:
+          - not_null
+      - name: RESPONDENT
+        description: ""
+        data_tests:
+          - not_null
+      - name: RESPONDENT_NAME
+        description: ""
+        data_tests:
+          - not_null
+      - name: FUELTYPE
+        description: ""
+        data_tests:
+          - not_null
+      - name: TYPE_NAME
+        description: ""
+        data_tests:
+          - not_null
+      - name: VALUE
+        description: ""
+        data_tests:
+          - not_null
+      - name: VALUE_UNIT
+        description: ""
+        data_tests:
+          - not_null
+
+  - name: base_bootcamp_raw_noaa_data
+    description: "The base_bootcamp_raw_noaa_data model is a transformation of the raw NOAA data, renaming the columns for better readability and understanding."
+    columns:
+      - name: ID
+        description: "none"
+        data_tests:
+          - not_null
+      - name: DATE
+        description: "none"
+        data_tests:
+          - not_null
+      - name: ELEMENT
+        description: "none"
+        data_tests:
+          - not_null
+      - name: DATA_VALUE
+        description: "none"
+        data_tests:
+          - not_null
+      - name: M_FLAG
+        description: "none"
+        data_tests:
+          - not_null
+      - name: Q_FLAG
+        description: "none"
+        data_tests:
+          - not_null
+      - name: S_FLAG
+        description: "none"
+        data_tests:
+          - not_null
+      - name: OBS_TIME
+        description: "none"
+        data_tests:
+         - not_null
+
+ 
+       

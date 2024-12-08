@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: fact_energy_data
+    description: "This fact table is for eia.gov energy production data"
+    columns:
+      - name: period
+        description: ""
+        data_tests:
+          - not_null
+      - name: respondent
+        description: ""
+        data_tests:
+          - not_null
+      - name: fueltype
+        description: ""
+        data_tests:
+          - not_null
+      - name: type_name
+        description: ""
+        data_tests:
+          - not_null
+      - name: value
+        description: ""
+        data_tests:
+          - not_null

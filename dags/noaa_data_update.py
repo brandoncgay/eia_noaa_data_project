@@ -4,7 +4,7 @@ from airflow.utils.dates import datetime, timedelta
 from include.noaa_data_funtions import merge_data_to_snowflake
 
 @dag(
-    description="A dag extracts data from noaa s3 and merges it into a snowflake table.",
+    description="A dag that extracts data from noaa s3 and merges it into a snowflake table.",
     default_args={
         "owner": "Brandon Gay",
         "start_date": datetime(2024, 12, 1),

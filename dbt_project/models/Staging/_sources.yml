@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: bootcamp
+    database: dataexpert_student
+    schema: brandoncgay
+    tables:
+      - name: raw_noaa_data
+      - name: eia_fuel_type_data
+      - name: noaa_stations
