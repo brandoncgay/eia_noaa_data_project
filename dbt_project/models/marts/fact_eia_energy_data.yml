@@ -1,26 +1,29 @@
-version: 2
-
 models:
-  - name: fact_energy_data
-    description: "This fact table is for eia.gov energy production data"
+  - name: fact_eia_energy_data
+    description: "The fact_eia_energy_data model is a fact table that contains data related to energy consumption. It is derived from the base_bootcamp_eia_fuel_type_data table in the DATAEXPERT_STUDENT.brandoncgay schema. The model has five columns: PERIOD, RESPONDENT, FUELTYPE, TYPE_NAME, and VALUE. The PERIOD column represents the time period for the data. The RESPONDENT column represents the entity that provided the data. The FUELTYPE column represents the type of fuel used. The TYPE_NAME column represents the name of the type of data. The VALUE column represents the value of the data."
     columns:
       - name: period
-        description: ""
+        description: The period column represents the time frame for the energy data. It is a string type and can contain various formats of date and time.
+        data_type: varchar
         data_tests:
           - not_null
       - name: respondent
-        description: ""
+        description: The respondent column represents the entity that provided the energy data. It is a string type and can contain names of individuals, companies, or organizations.
+        data_type: varchar
         data_tests:
           - not_null
       - name: fueltype
-        description: ""
+        description: The fueltype column represents the type of fuel that the energy data pertains to. It is a string type and can contain various types of fuels such as 'gas', 'oil', 'coal', etc.
+        data_type: varchar
         data_tests:
           - not_null
       - name: type_name
-        description: ""
+        description: The 'TYPE_NAME' column represents the specific type of fuel used. This is a categorical variable with values such as 'Coal', 'Natural Gas', 'Nuclear', 'Petroleum', 'Renewable', etc.
+        data_type: varchar
         data_tests:
           - not_null
       - name: value
-        description: ""
+        description: The 'VALUE' column represents the quantity or amount of the specific fuel type used. This is a numerical variable and the unit of measurement depends on the fuel type.
+        data_type: float
         data_tests:
           - not_null

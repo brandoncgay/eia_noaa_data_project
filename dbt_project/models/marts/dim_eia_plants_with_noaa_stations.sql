@@ -1,9 +1,5 @@
-{{ config(
-    materialized='table'
-) }}
-
-with plant_gen_joined as (
-select
+WITH plant_gen_joined AS (
+  SELECT
     p.UTILITY_ID,
     p.UTILITY_NAME,
     p.PLANT_CODE,
@@ -21,11 +17,12 @@ select
     g.ENERGY_SOURCES,
     s.STATION_ID,
     s.DISTANCE_M
-from {{ref("tmp_plant_data")}} p
-join {{ref("tmp_generator_data")}} g
-on g.PLANT_CODE = p.PLANT_CODE
-join {{ref("tmp_plants_with_nearest_station")}} s
-on p.PLANT_CODE = s.PLANT_CODE
+  FROM {{ ref('tmp_plant_data') }} AS p
+  JOIN {{ ref('tmp_generator_data') }} AS g
+    ON g.PLANT_CODE = p.PLANT_CODE
+  JOIN {{ ref('tmp_plants_with_nearest_station') }} AS s
+    ON p.PLANT_CODE = s.PLANT_CODE
 )
-
-select * from plant_gen_joined
+SELECT
+  *
+FROM plant_gen_joined

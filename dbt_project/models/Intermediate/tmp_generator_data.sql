@@ -1,0 +1,22 @@
+WITH generator_data AS (
+  SELECT
+    UTILITY_ID,
+    UTILITY_NAME,
+    PLANT_CODE,
+    PLANT_NAME,
+    STATE,
+    COUNTY,
+    ARRAY_AGG(DISTINCT TECHNOLOGY) AS TECHNOLOGIES,
+    ARRAY_AGG(DISTINCT ENERGY_SOURCE_1) AS ENERGY_SOURCES
+  FROM {{ ref('EIA_Generators_Y2023') }} AS EIA_Generators_Y2023
+  GROUP BY
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+)
+SELECT
+  *
+FROM generator_data

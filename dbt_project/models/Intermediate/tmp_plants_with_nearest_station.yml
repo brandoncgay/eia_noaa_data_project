@@ -1,0 +1,19 @@
+models:
+  - name: tmp_plants_with_nearest_station
+    description: "The 'tmp_plants_with_nearest_station' model is designed to provide information about the nearest station to each plant. It contains three columns: PLANT_CODE, STATION_ID, and DISTANCE_M. The PLANT_CODE is a numerical identifier for each plant. The STATION_ID is a string identifier for each station. The DISTANCE_M is a floating point number representing the minimum distance in meters between a plant and its nearest station. The model is created by joining the 'stations_with_nearest_plant' table with a subquery that calculates the minimum distance for each plant."
+    columns:
+      - name: plant_code
+        description: This is a numeric field that represents the unique identifier for each plant.
+        data_type: number
+        data_tests:
+          - not_null
+      - name: station_id
+        description: This is a string field that represents the unique identifier for each station. It is associated with the plant that is closest to it.
+        data_type: varchar
+        data_tests:
+          - not_null
+      - name: distance_m
+        description: This is a float field that represents the minimum distance in meters between a plant and its nearest station.
+        data_type: float
+        data_tests:
+          - not_null

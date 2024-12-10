@@ -2,29 +2,35 @@ version: 2
 
 models:
   - name: fact_noaa_data
-    description: "This fact table combines data raw_noaa_data with noaa_stations."
+    description: "The fact_noaa_data model is a fact table that combines data from the raw_noaa_data and noaa_stations models. It includes the date, element, and data_value columns from the raw_noaa_data model, and the latitude, longitude, and state columns from the noaa_stations model. The SQL query filters the data to include only records where the element is one of the following: 'TMIN', 'TMAX', 'PRCP', 'SNOW', 'SNWD', 'TSUN', 'WDMV', and where the state is not null."
     columns:
       - name: date
-        description: ""
+        description: "The date column represents the date on which the weather data was recorded. It is in the format YYYY-MM-DD."
         data_tests:
           - not_null
+        data_type: varchar
       - name: element
-        description: ""
+        description: "The element column represents the type of weather data recorded. It can be one of the following: 'TMIN' (minimum temperature), 'TMAX' (maximum temperature), 'PRCP' (precipitation), 'SNOW' (snowfall), 'SNWD' (snow depth), 'TSUN' (sunshine), 'WDMV' (wind movement)."
         data_tests:
           - not_null
+        data_type: varchar
       - name: data_value
-        description: ""
+        description: "The data_value column represents the recorded value for the corresponding weather element. The unit of measurement varies depending on the element."
         data_tests:
           - not_null
+        data_type: float
       - name: latitude
-        description: ""
+        description: "The latitude coordinate of the NOAA station where the data was collected. This is a decimal number, where positive values indicate locations north of the equator and negative values indicate locations south of the equator."
         data_tests:
           - not_null
+        data_type: float
       - name: longitude
-        description: ""
+        description: "The longitude coordinate of the NOAA station where the data was collected. This is a decimal number, where positive values indicate locations east of the prime meridian and negative values indicate locations west of the prime meridian."
         data_tests:
           - not_null
+        data_type: float
       - name: state
-        description: ""
+        description: "The U.S. state where the NOAA station is located. This is a string value that represents the two-letter postal abbreviation for each state."
         data_tests:
           - not_null
+        data_type: varchar

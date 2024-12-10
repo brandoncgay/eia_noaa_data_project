@@ -1,0 +1,64 @@
+models:
+  - name: tmp_plant_data
+    description: The tmp_plant_data model is derived from the EIA_Plant_Y2023 table in the DATAEXPERT_STUDENT.brandoncgay schema. It contains information about various plants, including their utility ID, utility name, plant code, plant name, street address, city, state, zip code, county, latitude, longitude, balancing authority code, and balancing authority name. The model filters out records where the balancing authority code is null.
+    columns:
+      - name: utility_id
+        description: A unique identifier for each utility company. This is a numeric field.
+        data_type: number
+        data_tests:
+          - not_null
+      - name: utility_name
+        description: The name of the utility company. This is a string field.
+        data_type: varchar
+        data_tests:
+          - not_null
+      - name: plant_code
+        description: A unique identifier for each power plant. This is a numeric field.
+        data_type: number
+        data_tests:
+          - not_null
+          - unique
+      - name: plant_name
+        description: The name of the power plant.
+        data_type: varchar
+        data_tests:
+          - not_null
+      - name: street_address
+        description: The street address where the power plant is located.
+        data_type: varchar
+      - name: city
+        description: The city where the power plant is located.
+        data_type: varchar
+      - name: state
+        description: The 'STATE' column represents the state in which the plant is located. It is a variable character field that can contain any valid state abbreviation.
+        data_type: varchar
+        data_tests:
+          - not_null
+      - name: zip
+        description: The 'ZIP' column represents the zip code of the plant's location. It is a numeric field that can contain any valid 5-digit zip code.
+        data_type: number
+        data_tests:
+          - not_null
+      - name: county
+        description: The 'COUNTY' column represents the county in which the plant is located. It is a variable character field that can contain any valid county name.
+        data_type: varchar
+      - name: latitude
+        description: This column represents the latitude of the plant location. It is a floating point number that ranges from -90 to 90, where -90 represents the south pole, 0 represents the equator, and 90 represents the north pole.
+        data_type: float
+        data_tests:
+          - not_null
+      - name: longitude
+        description: This column represents the longitude of the plant location. It is a floating point number that ranges from -180 to 180, where -180 represents the westmost point, 0 represents the prime meridian, and 180 represents the eastmost point.
+        data_type: float
+        data_tests:
+          - not_null
+      - name: balancing_authority_code
+        description: This column represents the code of the balancing authority that the plant is associated with. It is a string of alphanumeric characters. The balancing authority is responsible for integrating resource plans ahead of time, maintaining load-interchange-generation balance within a balancing authority area, and supporting interconnection frequency in real time.
+        data_type: varchar
+        data_tests:
+          - not_null
+      - name: balancing_authority_name
+        description: The name of the balancing authority that oversees the distribution of electricity from the plant. This is a string value and is not null in the dataset.
+        data_type: varchar
+        data_tests:
+          - not_null

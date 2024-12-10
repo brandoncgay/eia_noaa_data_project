@@ -5,69 +5,70 @@ models:
     description: "The base_bootcamp_eia_fuel_type_data model is a transformation of the eia_fuel_type_data table, providing a clean and renamed version of the original data from the dataexpert_student.brandoncgay schema."
     columns:
       - name: PERIOD
-        description: ""
+        description: "The period column represents the time frame for the data collected. It is a string type and can contain various formats of date and time."
         data_tests:
           - not_null
+        data_type: varchar
       - name: RESPONDENT
-        description: ""
+        description: "The respondent column represents the unique identifier for each respondent. It is a string type and can contain alphanumeric characters."
         data_tests:
           - not_null
+        data_type: varchar
       - name: RESPONDENT_NAME
-        description: ""
+        description: "The respondent_name column represents the full name of the respondent. It is a string type and can contain alphabetic characters."
         data_tests:
           - not_null
+        data_type: varchar
       - name: FUELTYPE
-        description: ""
+        description: "This column represents the type of fuel used. It is a string data type and can contain various types of fuels such as coal, gas, oil, etc."
         data_tests:
           - not_null
+        data_type: varchar
       - name: TYPE_NAME
-        description: ""
+        description: "This column represents the name of the fuel type. It is a string data type and can contain names corresponding to the fuel types mentioned in the FUELTYPE column."
         data_tests:
           - not_null
+        data_type: varchar
       - name: VALUE
-        description: ""
+        description: "This column represents the value associated with the fuel type. It is a float data type and can contain numerical values. The exact meaning of this value can vary depending on the context, but it typically represents a quantity or amount related to the fuel type."
         data_tests:
           - not_null
+        data_type: float
       - name: VALUE_UNIT
-        description: ""
-        data_tests:
-          - not_null
+        description: "This column represents the units of the values recorded in the 'VALUE' column. It provides context to the numerical data, indicating whether the values are measured in terms like gallons, pounds, kilowatts, etc."
 
   - name: base_bootcamp_raw_noaa_data
     description: "The base_bootcamp_raw_noaa_data model is a transformation of the raw NOAA data, renaming the columns for better readability and understanding."
     columns:
       - name: ID
-        description: "none"
+        description: "The unique identifier for each record in the base_bootcamp_raw_noaa_data model."
         data_tests:
           - not_null
+        data_type: varchar
       - name: DATE
-        description: "none"
+        description: "The date when the data was recorded. It is stored as a string in the base_bootcamp_raw_noaa_data model."
         data_tests:
           - not_null
+        data_type: varchar
       - name: ELEMENT
-        description: "none"
+        description: "The specific weather element that the data value represents in the base_bootcamp_raw_noaa_data model."
         data_tests:
           - not_null
+        data_type: varchar
       - name: DATA_VALUE
-        description: "none"
+        description: "This column represents the recorded data value for a specific weather element. The data type is float, which means it can contain decimal values."
         data_tests:
           - not_null
+        data_type: float
       - name: M_FLAG
-        description: "none"
-        data_tests:
-          - not_null
+        description: "This column represents the 'M' flag associated with the data. It is a varchar type, which means it can contain any alphanumeric characters. The specific meaning of the 'M' flag may vary depending on the context of the data."
+        data_type: varchar
       - name: Q_FLAG
-        description: "none"
-        data_tests:
-          - not_null
+        description: "This column represents the 'Q' flag associated with the data. It is a varchar type, which means it can contain any alphanumeric characters. The specific meaning of the 'Q' flag may vary depending on the context of the data."
+        data_type: varchar
       - name: S_FLAG
-        description: "none"
-        data_tests:
-          - not_null
+        description: "This column represents the source flag associated with the data. It is a varchar type and can contain any alphanumeric characters. The source flag indicates the origin of the data and can be used to trace back to the original data source if needed."
+        data_type: varchar
       - name: OBS_TIME
-        description: "none"
-        data_tests:
-         - not_null
-
- 
-       
+        description: "This column represents the observation time of the data. It is a varchar type and typically contains the time in a 24-hour format. This column is used to record the exact time when the data was observed or collected."
+        data_type: varchar

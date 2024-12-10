@@ -1,9 +1,5 @@
-{{ config(
-    materialized='view'
-) }}
-
-with plant_data as (
-select
+WITH plant_data AS (
+  SELECT
     UTILITY_ID,
     UTILITY_NAME,
     PLANT_CODE,
@@ -17,8 +13,11 @@ select
     LONGITUDE,
     BALANCING_AUTHORITY_CODE,
     BALANCING_AUTHORITY_NAME
-from {{ ref('EIA_Plant_Y2023') }}
-where BALANCING_AUTHORITY_CODE is not null
+  FROM {{ ref('EIA_Plant_Y2023') }} AS EIA_Plant_Y2023
+  WHERE
+    NOT BALANCING_AUTHORITY_CODE IS NULL
 )
-
-select * from plant_data
+SELECT
+  *
+FROM plant_data
+WHERE LATITUDE is not null and LONGITUDE is not null

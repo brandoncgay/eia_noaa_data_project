@@ -1,0 +1,37 @@
+models:
+  - name: tmp_generator_data
+    description: The tmp_generator_data model is a summary of generator data. It includes information about the utility, the plant, and the technologies and energy sources used. The data is grouped by utility ID, utility name, plant code, plant name, state, and county. The TECHNOLOGIES and ENERGY_SOURCES columns are arrays that contain the distinct technologies and energy sources used by each group.
+    columns:
+      - name: utility_id
+        description: The unique identifier for each utility company.
+        data_type: varchar
+        data_tests:
+          - not_null
+      - name: utility_name
+        description: The name of the utility company.
+        data_type: varchar
+      - name: plant_code
+        description: The unique code assigned to each power plant.
+        data_type: number
+        data_tests:
+          - not_null
+          - unique
+      - name: plant_name
+        description: The name of the power plant where the generator is located.
+        data_type: varchar
+      - name: state
+        description: The state in which the power plant is located.
+        data_type: varchar
+      - name: county
+        description: The county in which the power plant is located.
+        data_type: varchar
+      - name: technologies
+        description: This column represents the array of distinct technologies used in the power plant. The data is aggregated from the TECHNOLOGY column of the EIA_Generators_Y2023 table.
+        data_type: array
+        data_tests:
+          - not_null
+      - name: energy_sources
+        description: This column represents the array of distinct energy sources used in the power plant. The data is aggregated from the ENERGY_SOURCE_1 column of the EIA_Generators_Y2023 table.
+        data_type: array
+        data_tests:
+          - not_null

@@ -1,20 +1,18 @@
-{{ config(
-    materialized='table'
-) }}
-
-with noaa_data as (
-select 
+WITH noaa_data AS (
+  SELECT
     d.date,
     d.element,
     d.data_value,
     s.latitude,
     s.longitude,
     s.state
-from {{ ref('base_bootcamp_raw_noaa_data' )}} d
-join {{ ref('noaa_stations')}} s
-on d.id = s.id
-where d.element in ('TMIN', 'TMAX', 'PRCP', 'SNOW', 'SNWD', 'TSUN', 'WDMV')
-and s.state is not null
+  FROM {{ ref('base_bootcamp_raw_noaa_data') }} AS d
+  JOIN {{ ref('noaa_stations') }} AS s
+    ON d.id = s.id
+  WHERE
+    d.element IN ('TMIN', 'TMAX', 'PRCP', 'SNOW', 'SNWD', 'TSUN', 'WDMV')
+    AND NOT s.state IS NULL
 )
-
-select * from noaa_data
+SELECT
+  *
+FROM noaa_data

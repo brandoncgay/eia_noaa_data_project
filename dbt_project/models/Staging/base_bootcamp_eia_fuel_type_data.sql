@@ -1,21 +1,18 @@
-{{ config(
-    materialized='view'
-) }}
-
-with source as (
-      select * from {{ source('bootcamp', 'eia_fuel_type_data') }}
-),
-renamed as (
-    select
-        {{ adapter.quote("PERIOD") }},
-        {{ adapter.quote("RESPONDENT") }},
-        {{ adapter.quote("RESPONDENT_NAME") }},
-        {{ adapter.quote("FUELTYPE") }},
-        {{ adapter.quote("TYPE_NAME") }},
-        {{ adapter.quote("VALUE") }},
-        {{ adapter.quote("VALUE_UNITS") }}
-
-    from source
+WITH source AS (
+  SELECT
+    *
+  FROM {{ source('bootcamp', 'eia_fuel_type_data') }} AS eia_fuel_type_data
+), renamed AS (
+  SELECT
+    "PERIOD",
+    "RESPONDENT",
+    "RESPONDENT_NAME",
+    "FUELTYPE",
+    "TYPE_NAME",
+    "VALUE",
+    "VALUE_UNITS"
+  FROM source
 )
-select * from renamed
-  
+SELECT
+  *
+FROM renamed
