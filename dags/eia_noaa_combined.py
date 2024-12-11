@@ -26,16 +26,16 @@ profile_config = ProfileConfig(
     description="A dag that extracts data from eia.gov api and merges it into a snowflake table.",
     default_args={
         "owner": "Brandon Gay",
-        "start_date": datetime(2024, 1, 1),
+        "start_date": datetime(2024, 12, 1),
         "retries": 0,
         "execution_timeout": timedelta(hours=1),
     },
-    start_date=datetime(2024, 1, 1),
+    start_date=datetime(2024, 12, 1),
     max_active_runs=1,
     schedule_interval="@daily",
     catchup=True,
     template_searchpath='include',
-    tags=["eia"],
+    tags=["eia","noaa","dbt"],
 )
 def get_eia_and_noaa_data():
     
