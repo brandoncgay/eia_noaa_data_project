@@ -7,7 +7,7 @@ from airflow.macros import ds_add, ds_format
 
 # Step 1: Configure Snowflake connection
 def create_snowflake_session():
-    load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
+    # load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
     connection_parameters = {
         "account": os.getenv("SNOWFLAKE_ACCOUNT"),
         "user": os.getenv("SNOWFLAKE_USER"),
@@ -17,7 +17,9 @@ def create_snowflake_session():
         "database": os.getenv("SNOWFLAKE_DATABASE"),
         "schema": os.getenv("SNOWFLAKE_SCHEMA")
     }
-
+    debug_params = {k: v for k, v in connection_parameters.items()}
+    print("Debug Connection Parameters:", debug_params)
+    
     session = Session.builder.configs(connection_parameters).create()
     return session
 
