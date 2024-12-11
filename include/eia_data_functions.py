@@ -21,7 +21,7 @@ def create_snowflake_session():
     session = Session.builder.configs(connection_parameters).create()
     return session
 
-def create_table_in_snowflake(session):
+def create_eia_table_in_snowflake(session):
     create_table_sql = """
     CREATE TABLE IF NOT EXISTS eia_fuel_type_data (
         period STRING,
@@ -88,9 +88,9 @@ def get_eia_data_from_api(ds):
     return all_data
 
 # Step 3: Define Snowflake table schema
-def merge_data_to_snowflake(data):
+def merge_eia_data_to_snowflake(data):
     session = create_snowflake_session()
-    create_table_in_snowflake(session)
+    create_eia_table_in_snowflake(session)
     
     schema = StructType([
         StructField("period", StringType()),

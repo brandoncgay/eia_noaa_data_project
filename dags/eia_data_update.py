@@ -1,9 +1,10 @@
 from airflow.decorators import dag, task
 from airflow.utils.dates import datetime, timedelta
 
-from include.eia_data_functions import get_eia_data_from_api, merge_data_to_snowflake
+from include.eia_data_functions import get_eia_data_from_api, merge_eia_data_to_snowflake
 
 @dag(
+    dag_id='get_eia_data',
     description="A dag that extracts data from eia.gov api and merges it into a snowflake table.",
     default_args={
         "owner": "Brandon Gay",
@@ -26,7 +27,7 @@ def get_eia_data():
     
     @task
     def update_table_task(data):
-        return merge_data_to_snowflake(data)
+        return merge_eia_data_to_snowflake(data)
     
 
     data = extract_data_task()

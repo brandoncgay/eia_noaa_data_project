@@ -1,9 +1,10 @@
 from airflow.decorators import dag, task
 from airflow.utils.dates import datetime, timedelta
 
-from include.noaa_data_funtions import merge_data_to_snowflake
+from include.noaa_data_funtions import merge_noaa_data_to_snowflake
 
 @dag(
+    dag_id='get_noaa_data',
     description="A dag that extracts data from noaa s3 and merges it into a snowflake table.",
     default_args={
         "owner": "Brandon Gay",
@@ -22,7 +23,7 @@ def get_noaa_data():
     
     @task
     def update_table_task(ds):
-        return merge_data_to_snowflake(ds)
+        return merge_noaa_data_to_snowflake(ds)
     
     update_table_task()
 

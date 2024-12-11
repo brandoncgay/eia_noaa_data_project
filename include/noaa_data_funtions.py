@@ -6,7 +6,7 @@ from snowflake.snowpark.functions import when_matched, when_not_matched
 from include.eia_data_functions import create_snowflake_session
 
 
-def create_table_in_snowflake(session):
+def create_noaa_table_in_snowflake(session):
     create_table_sql = """
     CREATE TABLE IF NOT EXISTS raw_noaa_data (
         ID STRING,
@@ -22,10 +22,10 @@ def create_table_in_snowflake(session):
     session.sql(create_table_sql).collect()
 
 
-def merge_data_to_snowflake(ds):
+def merge_noaa_data_to_snowflake(ds):
     # Initialize Snowpark session
     session = create_snowflake_session()
-    create_table_in_snowflake(session)
+    create_noaa_table_in_snowflake(session)
     
     # Stage for the public S3 bucket
     stage = "@my_s3_stage/"
