@@ -1,6 +1,7 @@
 WITH noaa_data AS (
   SELECT
     d.date,
+    d.id,
     d.element,
     d.data_value,
     s.latitude,
